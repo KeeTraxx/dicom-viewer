@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+    display: table;
+}
+
+table th, table td {
+    text-align: left;
+}   
+
+th:first-child {
+    width: 10%;
+}
+
+th:last-child {
+    width: 20%;
+}

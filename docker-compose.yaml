@@ -1,0 +1,24 @@
+services:
+  backend:
+    image: node:lts
+    ports:
+      - 4000:4000
+    volumes:
+      - ./dicom-backend:/app
+      - ./dicom-backend-data:/dicom-backend-data
+    working_dir: /app
+    entrypoint: sh -c
+    environment:
+      DATABASE_URL: sqlite:/dicom-backend-data/sqlite.db
+    command:
+      - "npm install && npm start"
+  frontend:
+    image: node:lts-alpine
+    ports:
+      - 5173:5173
+    volumes:
+      - ./dicom-frontend:/app
+    working_dir: /app
+    entrypoint: sh -c
+    command:
+      - "npm install && npm run dev"

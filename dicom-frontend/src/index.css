@@ -1,0 +1,11 @@
+footer, header, main {
+    margin: 0;
+    max-width: unset;
+    padding: 1em;
+}
+
+header {
+    background-color: aliceblue;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+
+}
