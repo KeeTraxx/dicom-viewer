@@ -13,7 +13,6 @@ function Upload() {
     
     function drop(e: React.DragEvent) {
         noop(e);
-        console.log(e, e.dataTransfer.files[0]);
         
         if (e?.dataTransfer?.files) {
             [...e.dataTransfer.files].forEach(file => {

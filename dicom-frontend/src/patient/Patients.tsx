@@ -42,9 +42,9 @@ function Patients() {
           <tbody>
             {patients.map((patient) => (
               <tr key={patient.id}>
-                <td>{patient.id}</td>
+                <td title={patient.id}><div>{patient.id}</div></td>
                 <td>{patient.name}</td>
-                <td>{new Date(patient.birthDate).toDateString()}</td>
+                <td>{new Date(patient.birthDate).toISOString().split('T')[0]}</td>
                 <td><NavLink to={`/patient/${patient.id}`}>🔍</NavLink></td>
               </tr>
             ))}

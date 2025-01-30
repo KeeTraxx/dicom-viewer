@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import DicomPreview from '../dicom-file/DicomPreview';
 import { gql } from '../helper/graphql';
-import './Patients.css';
+import './Patient.css';
 import type { Patient as P } from './types';
 
 
 function Patient() {
   const [patient, setPatient] = useState<P>();
-  let {patientId} = useParams();
+  let { patientId } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -39,28 +39,26 @@ function Patient() {
               }
             }
           }`, {
-            patientId
-          });
+        patientId
+      });
       setPatient(response.patient);
     })();
   }, []);
 
   return (
     <>
-      <main>
-        <h1>Patient {patient?.name}</h1>
-        <dl>
-          <dt>DOB</dt>
-          <dd>{patient?.birthDate}</dd>
-          <dt>Sex</dt>
-          <dd>{patient?.sex}</dd>
-          <dt>Weight</dt>
-          <dd>{patient?.weight} kg</dd>
-        </dl>
-        {patient?.DicomFiles.map((file) => (
-          <DicomPreview key={file.id} dicomFile={file} />
-        ))}
-      </main>
+      <h1>Patient {patient?.name}
+        <sup>Sex: {patient?.sex}</sup>
+        <sup>DOB: {patient?.birthDate ? new Date().toISOString().split('T')[0] : 'n/a'}</sup>
+        <sup>Weight: {patient?.weight} kg</sup>
+      </h1>
+
+      <small>ID: {patient?.id}</small>
+      <hr />
+      
+      {patient?.DicomFiles.map((file) => (
+        <DicomPreview key={file.id} dicomFile={file} />
+      ))}
     </>
   )
 }

@@ -1,0 +1,37 @@
+.preview-box {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    font-size: 75%;
+    align-items: center;
+
+    border-radius: 0.5em;
+    border: 1px solid lightgray;
+
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
+
+    dt {
+        opacity: 0.7;
+    }
+
+    dd {
+        margin-left: 1em;
+        font-weight: bold;
+    }
+
+    padding: 1em;
+
+    background-color: #fcfcff;
+}
+
+.container {
+    display: flex;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+hr {
+    margin: 1em 0;
+}

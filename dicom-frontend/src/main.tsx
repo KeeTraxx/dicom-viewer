@@ -7,6 +7,8 @@ import Nav from './nav/Nav.tsx'
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Nav />
-    <AppRoutes />
+    <main>
+      <AppRoutes />
+    </main>
   </BrowserRouter>,
 )
