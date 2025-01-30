@@ -35,6 +35,9 @@ Contributions are welcome! Please submit a pull request with a clear description
 ## License
 Dicom Viewer is licensed under the MIT License.
 
+## Motivation
+This project was made to learn about handling various DICOM formats.
+
 ## Used libraries
 
 - Frontend framework: React
