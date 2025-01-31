@@ -55,10 +55,11 @@ function Patient() {
 
       <small>ID: {patient?.id}</small>
       <hr />
-      
-      {patient?.DicomFiles.map((file) => (
-        <DicomPreview key={file.id} dicomFile={file} />
-      ))}
+      <div className="container">
+        {patient?.DicomFiles.map((file) => (
+          <DicomPreview key={file.id} dicomFile={file} />
+        ))}
+      </div>
     </>
   )
 }
