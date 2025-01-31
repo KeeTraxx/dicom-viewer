@@ -24,11 +24,11 @@ Patient.init({
     name: DataTypes.STRING,
     birthDate: DataTypes.DATE,
     sex: DataTypes.STRING,
-    age: DataTypes.INTEGER,
+    age: DataTypes.STRING,
     weight: DataTypes.INTEGER,
     createdAt: DataTypes.DATE
 }, { sequelize });
 
 Patient.hasMany(DicomFile, {foreignKey: 'patientId'});
 
-sequelize.sync();
+sequelize.sync({alter: true});

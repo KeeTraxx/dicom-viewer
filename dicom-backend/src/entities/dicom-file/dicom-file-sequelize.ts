@@ -39,7 +39,7 @@ DicomFile.init({
     physicianName: DataTypes.STRING,
     manufacturer: DataTypes.STRING,
     manufacturerModelName: DataTypes.STRING,
-    payload: DataTypes.BLOB,
+    payload: DataTypes.BLOB("long"),
     modality: DataTypes.STRING,
     createdAt: DataTypes.DATE
 }, { sequelize });

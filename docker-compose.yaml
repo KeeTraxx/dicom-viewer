@@ -1,17 +1,27 @@
 services:
+  db:
+    image: mariadb:lts
+    environment:
+      MARIADB_USER: DrWho
+      MARIADB_PASSWORD: SonicScrewdriver
+      MARIADB_DATABASE: dicom
+      MARIADB_RANDOM_ROOT_PASSWORD: true
+    ports:
+      - 3306:3306
   backend:
     image: node:lts
     ports:
       - 4000:4000
     volumes:
       - ./dicom-backend:/app
-      - ./dicom-backend-data:/dicom-backend-data
     working_dir: /app
     entrypoint: sh -c
     environment:
-      DATABASE_URL: sqlite:/dicom-backend-data/sqlite.db
+      DATABASE_URL: mysql://DrWho:SonicScrewdriver@db/dicom
     command:
       - "npm install && npm start"
+    depends_on:
+      - db
   frontend:
     build: dicom-frontend
     ports:
