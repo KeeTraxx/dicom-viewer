@@ -49,7 +49,7 @@ function Patient() {
     <>
       <h1>Patient {patient?.name}
         <sup>Sex: {patient?.sex}</sup>
-        <sup>DOB: {patient?.birthDate ? new Date().toISOString().split('T')[0] : 'n/a'}</sup>
+        <sup>DOB: {patient?.birthDate ? new Date(patient?.birthDate).toISOString().split('T')[0] : 'n/a'}</sup>
         <sup>Weight: {patient?.weight} kg</sup>
       </h1>
 

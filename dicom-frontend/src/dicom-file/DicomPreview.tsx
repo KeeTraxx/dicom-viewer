@@ -41,7 +41,6 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
         })();
     }, [dicomFile.id]);
     return (
-        <div className="container">
             <div className="preview-box">
                 <div>
                     <canvas ref={canvasRef} />
@@ -71,7 +70,6 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
                     <a href={`/api/fetch/${dicomFile.id}`}><button>Download</button></a>
                 </div>
             </div>
-        </div>
     )
 }
 
