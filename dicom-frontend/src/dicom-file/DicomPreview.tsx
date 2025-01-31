@@ -39,7 +39,7 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
             await Renderer.render(image, canvasRef.current, 0.5);
 
         })();
-    }, []);
+    }, [dicomFile.id]);
     return (
         <div className="container">
             <div className="preview-box">

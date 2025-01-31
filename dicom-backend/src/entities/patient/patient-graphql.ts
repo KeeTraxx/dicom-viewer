@@ -23,8 +23,8 @@ export const patientTypeDefs = gql`
 export const patientResolvers = {
     Query: {
         patients: async () => await Patient.findAll(),
-        patient: async (_: any, { id }: any) => {
-            const res = await Patient.findByPk(id, {include: DicomFile, plain: true});
+        patient: async (_: never, { id }: { id: string }) => {
+            const res = await Patient.findByPk(id, { include: DicomFile, plain: true });
             return res.toJSON();
         },
     },

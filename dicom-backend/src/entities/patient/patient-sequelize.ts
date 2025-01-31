@@ -1,10 +1,10 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataTypes } from "sequelize";
 
 import { CreationOptional, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 import { DicomFile } from "../dicom-file/dicom-file-sequelize";
 
 
-import {sequelize} from "../../config/sequelize";
+import { sequelize } from "../../config/sequelize";
 
 export class Patient extends Model<InferAttributes<Patient>, InferCreationAttributes<Patient>> {
     declare id: string;

@@ -25,7 +25,7 @@ function DicomFile(props: DicomFileProps) {
 
             setPatient(`Successfully uploaded for patient: ${response.data.patient.name}`);
         })();
-    }, []);
+    }, [props.file]);
 
     return (
         <>

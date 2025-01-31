@@ -4,7 +4,7 @@ import DicomFile from './DicomFile';
 
 
 function Upload() {
-    let [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<File[]>([]);
     function noop(e: React.DragEvent) {
         e.stopPropagation();
         e.preventDefault();

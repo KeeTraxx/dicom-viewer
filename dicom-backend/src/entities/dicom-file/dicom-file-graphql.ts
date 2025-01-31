@@ -25,7 +25,7 @@ export const dicomFileTypeDefs = gql`
 
 export const dicomFileResolvers = {
     Query: {
-        dicomFiles: async (_: any, { patientId }: any) => await DicomFile.findAll({ where: { patientId } }),
+        dicomFiles: async (_: never, { patientId }: { patientId: string }) => await DicomFile.findAll({ where: { patientId } }),
     },
 }
 

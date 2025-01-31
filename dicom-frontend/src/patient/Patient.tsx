@@ -8,7 +8,7 @@ import type { Patient as P } from './types';
 
 function Patient() {
   const [patient, setPatient] = useState<P>();
-  let { patientId } = useParams();
+  const { patientId } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -43,7 +43,7 @@ function Patient() {
       });
       setPatient(response.patient);
     })();
-  }, []);
+  }, [patientId]);
 
   return (
     <>
