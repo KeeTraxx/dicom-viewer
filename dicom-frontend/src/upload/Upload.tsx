@@ -15,9 +15,9 @@ function Upload() {
         noop(e);
         
         if (e?.dataTransfer?.files) {
-            [...e.dataTransfer.files].forEach(file => {
-                setFiles([...files, file])
-            });
+            const currentFiles = [...e.dataTransfer.files];
+            currentFiles.push(...files);
+            setFiles(currentFiles);
         } 
     }
     return (
