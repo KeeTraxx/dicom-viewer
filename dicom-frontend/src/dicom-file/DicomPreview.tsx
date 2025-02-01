@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { DicomFile } from "../patient/types";
 import axios from "axios";
 import dicomts from 'dicom.ts'
-import Renderer from 'dicom.ts'
+import DicomViewer from './DicomViewer'
 
 export interface DicomPreviewProps {
     dicomFile: DicomFile;
@@ -10,6 +10,8 @@ export interface DicomPreviewProps {
 
 function DicomPreview({ dicomFile }: DicomPreviewProps) {
     const canvasRef = useRef(null);
+    const [showViewer, setShowViewer] = useState(false);
+    const [image, setImage] = useState<DCMImage | undefined>(undefined);
     const [metadata, setMetadata] = useState({
         width: 0,
         height: 0,
@@ -27,6 +29,7 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
             if (!image || !canvasRef.current) {
                 return;
             }
+            setImage(image);
 
             setMetadata({
                 width: image.columns,
@@ -36,14 +39,15 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
                 photometricInterpretation: image.photometricInterpretation
             });
 
-            await Renderer.render(image, canvasRef.current, 0.5);
+            await dicomts.render(image, canvasRef.current, 0.5);
 
         })();
     }, [dicomFile.id]);
     return (
+        <>
             <div className="preview-box">
                 <div>
-                    <canvas ref={canvasRef} />
+                    <canvas ref={canvasRef} onClick={() => { setShowViewer(true) }} />
                     <div style={{ textAlign: 'center' }}>
                         <div>{metadata.width} x {metadata.height} pixels</div>
                         <div>{metadata.bitsStored}/{metadata.bitsAllocated}bits</div>
@@ -70,6 +74,8 @@ function DicomPreview({ dicomFile }: DicomPreviewProps) {
                     <a href={`/api/fetch/${dicomFile.id}`}><button>Download</button></a>
                 </div>
             </div>
+            { showViewer ? <DicomViewer dcmImage={image} onClose={() => { setShowViewer(false) }} />  : ''}
+        </>
     )
 }
 

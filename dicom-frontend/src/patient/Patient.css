@@ -28,6 +28,10 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5em;
+
+    canvas {
+        cursor: pointer;
+        }
 }
 
 h1 {
