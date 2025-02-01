@@ -17,15 +17,31 @@ div.viewer {
         cursor: crosshair;
     }
 
-    svg g.lines {
-        stroke: green;
-        stroke-width: 3px;
-        stroke-dasharray: 8 2;
-    }
-
-    svg g.drag {
-        stroke: lightgreen;
-        stroke-width: 3px;
-        stroke-dasharray: 8 2;
+    svg {
+        text {
+            fill: white;
+        }
+        g.lines {
+            stroke: green;
+            stroke-width: 3px;
+            stroke-dasharray: 8 2;
+    
+        }
+    
+        g.lineText text {
+            fill: green;
+            text-anchor: middle;
+        }
+    
+        g.drag {
+            stroke: lightgreen;
+            stroke-width: 3px;
+            stroke-dasharray: 8 2;
+        }
+    
+        g.dragText text {
+            fill: lightgreen;
+            text-anchor: middle;
+        }
     }
 }

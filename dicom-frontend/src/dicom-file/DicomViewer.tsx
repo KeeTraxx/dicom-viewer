@@ -2,9 +2,10 @@ import dicomts from 'dicom.ts'
 import { useEffect, useRef, useState } from 'react';
 import './DicomViewer.css';
 import DicomAnnotator from './DicomAnnotator';
+import { DCMImage } from './models';
 
 interface DicomViewerProps {
-    dcmImage: Renderer.DCMImage;
+    dcmImage?: DCMImage;
     onClose: () => void;
 }
 
@@ -12,14 +13,16 @@ function DicoomViewer(props: DicomViewerProps) {
     const canvasRef = useRef(null);
     const [canvas, setCanvas] = useState(null);
     useEffect(() => {
-        if (canvasRef.current === null) {
+        if (!canvasRef.current) {
             return;
         }
         setCanvas(canvasRef.current);
+
+        // @ts-expect-error too much of a hassle
         dicomts.render(props.dcmImage, canvasRef.current, 2);
 
     
-    }, [props.dcmImage, canvasRef.current, canvas]);
+    }, [props.dcmImage, canvas]);
 
     return (
         <>

@@ -3,6 +3,7 @@ import { DicomFile } from "../patient/types";
 import axios from "axios";
 import dicomts from 'dicom.ts'
 import DicomViewer from './DicomViewer'
+import { DCMImage } from "./models";
 
 export interface DicomPreviewProps {
     dicomFile: DicomFile;
