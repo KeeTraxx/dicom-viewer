@@ -1,5 +1,6 @@
 div.viewer {
     position:fixed;
+    z-index: 999;
     top: 0;
     left: 0;
     right: 0;
@@ -7,8 +8,24 @@ div.viewer {
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
 
+    .overlay {
+        margin: 2em;
+    }
+
     .overlay > * {
         position: absolute;
         cursor: crosshair;
+    }
+
+    svg g.lines {
+        stroke: green;
+        stroke-width: 3px;
+        stroke-dasharray: 8 2;
+    }
+
+    svg g.drag {
+        stroke: lightgreen;
+        stroke-width: 3px;
+        stroke-dasharray: 8 2;
     }
 }
