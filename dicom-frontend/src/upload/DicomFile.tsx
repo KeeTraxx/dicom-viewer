@@ -12,7 +12,7 @@ function DicomFile(props: DicomFileProps) {
     useEffect(() => {
         (async () => {
             const buffer = await props.file.arrayBuffer();
-            const response = await axios.put('http://localhost:4000/api/upload', buffer, {
+            const response = await axios.put('/api/upload', buffer, {
                 headers: {
                     'Content-Type': 'application/dicom',
                     'x-original-file-name': props.file.name
