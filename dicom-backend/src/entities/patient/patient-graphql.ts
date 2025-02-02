@@ -18,7 +18,7 @@ export const patientTypeDefs = gql`
         patients: [Patient!]!
         patient(id: ID!): Patient
     }
-`
+`;
 
 export const patientResolvers = {
     Query: {
@@ -28,5 +28,5 @@ export const patientResolvers = {
             return res.toJSON();
         },
     },
-}
+};
 
