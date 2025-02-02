@@ -43,5 +43,3 @@ DicomFile.init({
     modality: DataTypes.STRING,
     createdAt: DataTypes.DATE
 }, { sequelize });
-
-sequelize.sync();

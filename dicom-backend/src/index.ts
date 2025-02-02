@@ -8,16 +8,12 @@ import { upload } from './upload/upload';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { dicomFileResolvers, dicomFileTypeDefs } from './entities/dicom-file/dicom-file-graphql';
-import { Sequelize } from 'sequelize';
+import { sequelize } from './config/sequelize';
 import { fetch } from './download/download';
 import { typeDefs as scalarTypeDefs } from 'graphql-scalars';
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-
 const app = express();
 const httpServer = http.createServer(app);
-
 
 const server = new ApolloServer({
     typeDefs: [
@@ -35,12 +31,15 @@ const server = new ApolloServer({
 
 
 (async () => {
-    const sequelize = new Sequelize("sqlite:./sqlite.db");
-    sequelize.sync({ alter: true });
-
+    await sequelize.sync({ alter: true });
     await server.start();
+
+    // allow CORS from all origins
+    // TODO improve for productive deployment
     app.use(cors());
 
+    // .dcm files are sent in the body. form/multipart is avoided, as this would require
+    // an additional dependency, e.g. multer
     app.use('/api/upload', bodyParser.raw({
         type: 'application/dicom',
         inflate: true,
@@ -49,16 +48,20 @@ const server = new ApolloServer({
         upload
     );
 
+    // allows downloading .dcm files
+    // required to display them correctly or download as file
     app.use('/api/fetch/:id',
         fetch
     );
 
+    // expose GraphQL API in /api
     app.use(
         '/api',
         express.json(),
         expressMiddleware(server)
     );
 
+    // redirect root to GraphQL API
     app.use('/', (_, res) => {
         res.redirect('/api');
     });

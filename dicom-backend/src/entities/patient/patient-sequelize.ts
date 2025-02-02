@@ -3,7 +3,6 @@ import { DataTypes } from "sequelize";
 import { CreationOptional, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 import { DicomFile } from "../dicom-file/dicom-file-sequelize";
 
-
 import { sequelize } from "../../config/sequelize";
 
 export class Patient extends Model<InferAttributes<Patient>, InferCreationAttributes<Patient>> {
@@ -30,5 +29,3 @@ Patient.init({
 }, { sequelize });
 
 Patient.hasMany(DicomFile, {foreignKey: 'patientId'});
-
-sequelize.sync({alter: true});

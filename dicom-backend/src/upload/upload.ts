@@ -3,6 +3,14 @@ import daikon from 'daikon';
 import { Patient } from "../entities/patient/patient-sequelize";
 import { DicomFile } from "../entities/dicom-file/dicom-file-sequelize";
 
+/**
+ * Allows uploading a .dcm file.
+ * 
+ * Takes the original filename from header, so take care to set it, or else it will default to "no-name.dcm"
+ * 
+ * @param req 
+ * @param res Sends back the patient and file metadata (without payload)
+ */
 export async function upload(req: Request, res: Response) {
     const image = daikon.Series.parseImage(new DataView(req.body.buffer));
     const fileName = req.get('x-original-file-name') ?? 'no-name.dcm';

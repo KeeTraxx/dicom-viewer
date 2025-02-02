@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { DicomFile } from "../entities/dicom-file/dicom-file-sequelize";
 
+/**
+ * Download a DICOM file
+ * @param req 
+ * @param res 
+ */
 export async function fetch(req: Request, res: Response) {
     try {
 
