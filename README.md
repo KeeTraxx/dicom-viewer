@@ -21,6 +21,9 @@ Dicom Viewer is a web-based application designed to provide a user-friendly inte
 1. Clone the repository: `git clone https://github.com/KeeTraxx/dicom-viewer.git`
 2. Run `docker compose up`
 
+> [!IMPORTANT]
+> It will take several minutes to come up the first time you run, since it needs to build WASM modules.
+
 ## Usage
 
 ### Frontend application
