@@ -6,8 +6,6 @@ services:
       MARIADB_PASSWORD: SonicScrewdriver
       MARIADB_DATABASE: dicom
       MARIADB_RANDOM_ROOT_PASSWORD: true
-    ports:
-      - 3306:3306
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 10s
