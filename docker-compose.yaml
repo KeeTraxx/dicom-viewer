@@ -17,17 +17,19 @@ services:
     build: dicom-backend
     ports:
       - 4000:4000
-    working_dir: /app
     environment:
       DATABASE_URL: mysql://DrWho:SonicScrewdriver@db/dicom
     depends_on:
       - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000"]
+      start_period: 5s
+      interval: 2s
+      timeout: 2s
+      retries: 10
   frontend:
     build: dicom-frontend
     ports:
       - 5173:5173
-    volumes:
-      - ./dicom-frontend:/app
-    working_dir: /app
     depends_on:
       - backend
