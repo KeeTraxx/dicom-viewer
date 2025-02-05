@@ -12,14 +12,18 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      
   backend:
-    build: dicom-backend
+    image: node:lts
     ports:
       - 4000:4000
+    volumes:
+      - ./dicom-backend:/app
     working_dir: /app
+    entrypoint: sh -c
     environment:
       DATABASE_URL: mysql://DrWho:SonicScrewdriver@db/dicom
+    command:
+      - "npm install && npm start"
     depends_on:
       - db
   frontend:
@@ -29,5 +33,6 @@ services:
     volumes:
       - ./dicom-frontend:/app
     working_dir: /app
-    depends_on:
-      - backend
+    entrypoint: sh -c
+    command:
+      - "npm install && npm run dev"

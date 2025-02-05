@@ -31,6 +31,7 @@ const server = new ApolloServer({
 
 
 (async () => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     await sequelize.sync({ alter: true });
     await server.start();
 
