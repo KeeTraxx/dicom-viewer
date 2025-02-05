@@ -1,35 +1,34 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { FileUpload, FileUploadState } from "./Upload";
 
 interface DicomFileProps {
-    file: File
+    fileUpload: FileUpload
 }
 
 function DicomFile(props: DicomFileProps) {
-    const [progress, setProgress] = useState(0);
-    const [patient, setPatient] = useState<string | null>(null);
 
-    useEffect(() => {
-        (async () => {
-            const buffer = await props.file.arrayBuffer();
-            const response = await axios.put('/api/upload', buffer, {
-                headers: {
-                    'Content-Type': 'application/dicom',
-                    'x-original-file-name': props.file.name
-                },
-                onUploadProgress: (progressEvent) => {
-                    console.log(progressEvent.progress);
-                    setProgress(progressEvent.progress ?? 0);
-                }
-            });
-
-            setPatient(`Successfully uploaded for patient: ${response.data.patient.name}`);
-        })();
-    }, [props.file]);
+    function icon(state: FileUploadState) { 
+        switch (state) {
+            case FileUploadState.Queued:
+                return '⏳';
+            case FileUploadState.Uploading:
+                return '⮸';
+            case FileUploadState.Complete:
+                return '✅';
+        }
+    }
 
     return (
         <>
-            <div>{props.file.name} <progress value={progress} max="1" /> {patient}</div>
+            <div className="horizontal">
+                <div>
+                    {icon(props.fileUpload.state)}
+                </div>
+                <div>
+                    <small>{props.fileUpload.file.name}</small>
+                </div>
+                <progress value={props.fileUpload.progress} max="1" />
+                {props.fileUpload.successData?.patient.name}
+            </div>
         </>
     );
 }

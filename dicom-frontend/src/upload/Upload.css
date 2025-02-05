@@ -9,3 +9,11 @@
 
     height: 40vh;
 }
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-items: center;
+    align-items: center;
+}
